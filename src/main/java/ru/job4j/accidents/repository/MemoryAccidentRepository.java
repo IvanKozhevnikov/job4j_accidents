@@ -18,9 +18,9 @@ public class MemoryAccidentRepository implements AccidentRepository {
     private final Map<Integer, Accident> accidents = new ConcurrentHashMap<>();
 
     public MemoryAccidentRepository() {
-        create( new Accident(1, "Accident 1", "Парковка в неположенном месте", "ул. Гагарина д.9"));
-        create( new Accident(2, "Accident 2", "Отключены габаритные огни", "ул. Советская д.11"));
-        create( new Accident(3, "Accident 3", "Не уступил дорогу при помехе с права", "ул. Винокурова д.15"));
+        create(new Accident(1, "Accident 1", "Парковка в неположенном месте", "ул. Гагарина д.9"));
+        create(new Accident(2, "Accident 2", "Отключены габаритные огни", "ул. Советская д.11"));
+        create(new Accident(3, "Accident 3", "Не уступил дорогу при помехе с права", "ул. Винокурова д.15"));
     }
 
     @Override
