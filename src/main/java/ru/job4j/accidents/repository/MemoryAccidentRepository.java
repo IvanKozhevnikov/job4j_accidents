@@ -17,7 +17,11 @@ public class MemoryAccidentRepository implements AccidentRepository {
     private final AtomicInteger nextId = new AtomicInteger(0);
     private final Map<Integer, Accident> accidents = new ConcurrentHashMap<>();
 
-
+    public MemoryAccidentRepository() {
+        create( new Accident(1, "Accident 1", "Парковка в неположенном месте", "ул. Гагарина д.9"));
+        create( new Accident(2, "Accident 2", "Отключены габаритные огни", "ул. Советская д.11"));
+        create( new Accident(3, "Accident 3", "Не уступил дорогу при помехе с права", "ул. Винокурова д.15"));
+    }
 
     @Override
     public Accident create(Accident accident) {
@@ -43,9 +47,6 @@ public class MemoryAccidentRepository implements AccidentRepository {
 
     @Override
     public Collection<Accident> findAll() {
-        accidents.put(1, new Accident(1, "Accident 1", "Парковка в неположенном месте", "ул. Гагарина д.9"));
-        accidents.put(2, new Accident(2, "Accident 2", "Отключены габаритные огни", "ул. Советская д.11"));
-        accidents.put(3, new Accident(3, "Accident 3", "Не уступил дорогу при помехе с права", "ул. Винокурова д.15"));
         return accidents.values();
     }
 }
