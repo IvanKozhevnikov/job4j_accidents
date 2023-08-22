@@ -32,7 +32,8 @@ public class MemoryAccidentRepository implements AccidentRepository {
 
     @Override
     public boolean update(Accident accident) {
-        return accidents.replace(accident.getId(), accident) != null;
+        var newAccident = accidents.computeIfPresent(accident.getId(), (key, value) -> accident);
+        return newAccident != null;
     }
 
     @Override
