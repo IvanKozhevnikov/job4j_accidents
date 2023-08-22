@@ -4,13 +4,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.service.AccidentService;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/accidents") /* Работать с заявками будем по URI /vacancies/** */
+@RequestMapping("/accidents") /* Работать с заявками будем по URI /accidents/** */
 public class AccidentController {
     private final AccidentService accidentService;
 
@@ -54,7 +53,14 @@ public class AccidentController {
             model.addAttribute("message", "Вакансия с указанным идентификатором не найдена");
             return "errors/404";
         }
-        model.addAttribute("accident", accidentOptional.get());
+        model.addAttribute("accidents", accidentOptional.get());
         return "accidents/updateAccident";
+    }
+
+
+    @GetMapping("/update")
+    public String update(@RequestParam("id") int id, Model model) {
+        model.addAttribute("accident", accidentService.findById(id).get());
+        return "accidents/update";
     }
 }
