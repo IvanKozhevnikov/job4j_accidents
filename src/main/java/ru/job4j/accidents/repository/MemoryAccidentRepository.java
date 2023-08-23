@@ -2,6 +2,7 @@ package ru.job4j.accidents.repository;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
+import ru.job4j.accidents.model.AccidentType;
 import ru.job4j.accidents.model.Accident;
 
 import java.util.Collection;
@@ -18,9 +19,9 @@ public class MemoryAccidentRepository implements AccidentRepository {
     private final Map<Integer, Accident> accidents = new ConcurrentHashMap<>();
 
     public MemoryAccidentRepository() {
-        create(new Accident(1, "Accident 1", "Парковка в неположенном месте", "ул. Гагарина д.9"));
-        create(new Accident(2, "Accident 2", "Отключены габаритные огни", "ул. Советская д.11"));
-        create(new Accident(3, "Accident 3", "Не уступил дорогу при помехе с права", "ул. Винокурова д.15"));
+        create(new Accident(1, "Accident 1", "Парковка в неположенном месте", "ул. Гагарина д.9", new AccidentType(1, "Две машины")));
+        create(new Accident(2, "Accident 2", "Отключены габаритные огни", "ул. Советская д.11", new AccidentType(2, "Машина и человек")));
+        create(new Accident(3, "Accident 3", "Не уступил дорогу при помехе с права", "ул. Винокурова д.15", new AccidentType(3, "Машина и велосипед")));
     }
 
     @Override
@@ -32,8 +33,11 @@ public class MemoryAccidentRepository implements AccidentRepository {
 
     @Override
     public boolean update(Accident accident) {
-        var newAccident = accidents.computeIfPresent(accident.getId(), (key, value) -> accident);
-        return newAccident != null;
+        return accidents.computeIfPresent(accident.getId(), (key, value) -> {
+            return new Accident(
+                    value.getId(), value.getName(), value.getText(),
+                    value.getAddress(), value.getType());
+        }) != null;
     }
 
     @Override
