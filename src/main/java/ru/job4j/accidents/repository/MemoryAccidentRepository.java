@@ -17,6 +17,7 @@ public class MemoryAccidentRepository implements AccidentRepository {
 
     private final AtomicInteger nextId = new AtomicInteger(0);
     private final Map<Integer, Accident> accidents = new ConcurrentHashMap<>();
+    private final MemoryAccidentTypeRepository accidentType = new MemoryAccidentTypeRepository();
 
     public MemoryAccidentRepository() {
         create(new Accident(1, "Accident 1", "Парковка в неположенном месте", "ул. Гагарина д.9", new AccidentType(1, "Две машины")));
@@ -35,8 +36,9 @@ public class MemoryAccidentRepository implements AccidentRepository {
     public boolean update(Accident accident) {
         return accidents.computeIfPresent(accident.getId(), (key, value) -> {
             return new Accident(
-                    value.getId(), value.getName(), value.getText(),
-                    value.getAddress(), value.getType());
+                    value.getId(), accident.getName(), accident.getText(),
+                    accident.getAddress(), new AccidentType(accident.getType().getId(),
+                    accidentType.findById(accident.getType().getId()).get().getName()));
         }) != null;
     }
 
