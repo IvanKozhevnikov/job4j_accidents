@@ -27,16 +27,7 @@ public class AccidentController {
 
     @GetMapping("/createAccident")
     public String viewCreateAccident(Model model) {
-        List<AccidentType> types = new ArrayList<>();
-        types.add(new AccidentType(1, "Две машины"));
-        types.add(new AccidentType(2, "Машина и человек"));
-        types.add(new AccidentType(3, "Машина и велосипед"));
         model.addAttribute("types", accidentTypeService.findAll());
-        Set<Rule> rules = Set.of(
-                new Rule(1, "Статья. 1"),
-                new Rule(2, "Статья. 2"),
-                new Rule(3, "Статья. 3")
-        );
         model.addAttribute("accidents", accidentService.findAll());
         model.addAttribute("rules", ruleService.findAll());
         return "accidents/createAccident";
