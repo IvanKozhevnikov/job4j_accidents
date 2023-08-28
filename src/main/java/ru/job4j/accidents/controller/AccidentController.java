@@ -52,7 +52,7 @@ public class AccidentController {
                             Integer.parseInt(i)
                     );
             if (rule.isEmpty()) {
-                return "404";
+                return "errors/404";
             }
             rules.add(rule.get());
         }
@@ -83,7 +83,7 @@ public class AccidentController {
                                 .getId()
                 );
         if (accidentType.isEmpty()) {
-            return "404";
+            return "errors/404";
         }
         accident.setType(accidentType.get());
         String[] ds = httpServletRequest.getParameterValues("rIds");
@@ -94,13 +94,16 @@ public class AccidentController {
                             Integer.parseInt(i)
                     );
             if (rule.isEmpty()) {
-                return "404";
+                return "errors/404";
             }
             rules.add(rule.get());
         }
         accident.setRules(rules);
-        accidentService.update(accident);
-        model.addAttribute("message");
+        var isUpdated = accidentService.update(accident);
+        if (!isUpdated) {
+        model.addAttribute("message", "Обновление не выполнено");
+            return "errors/404";
+        }
         return "redirect:/index";
     }
 }
