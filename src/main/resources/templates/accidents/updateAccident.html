@@ -51,6 +51,16 @@
                             th:value="${type.id}" th:field="*{type.id}" th:selected="${type.name==type.id}"></option>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="type.id" name="rIds">Статья</label>
+                <select class="form-control" id="rIds" name="rIds" multiple>
+                    <option th:each="rule: ${rules}"
+                            th:text="${rule.name}"
+                            th:value="${rule.id}"></option>
+                </select>
+            </div>
+
+
             <div class="mb-3 row">
                 <div class="col-6"></div>
                 <div class="col-6">

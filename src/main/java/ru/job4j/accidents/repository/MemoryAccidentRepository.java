@@ -4,10 +4,12 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.AccidentType;
 import ru.job4j.accidents.model.Accident;
+import ru.job4j.accidents.model.Rule;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -18,11 +20,18 @@ public class MemoryAccidentRepository implements AccidentRepository {
     private final AtomicInteger nextId = new AtomicInteger(0);
     private final Map<Integer, Accident> accidents = new ConcurrentHashMap<>();
     private final MemoryAccidentTypeRepository accidentType = new MemoryAccidentTypeRepository();
+    private final MemoryRuleRepository memoryRuleRepository = new MemoryRuleRepository();
 
     public MemoryAccidentRepository() {
-        create(new Accident(1, "Accident 1", "Парковка в неположенном месте", "ул. Гагарина д.9", new AccidentType(1, "Две машины")));
-        create(new Accident(2, "Accident 2", "Отключены габаритные огни", "ул. Советская д.11", new AccidentType(2, "Машина и человек")));
-        create(new Accident(3, "Accident 3", "Не уступил дорогу при помехе с права", "ул. Винокурова д.15", new AccidentType(3, "Машина и велосипед")));
+        create(new Accident(1, "Accident 1", "Парковка в неположенном месте",
+                "ул. Гагарина д.9", new AccidentType(1, "Две машины"),
+                Set.of(new Rule(1, "Статья. 1"))));
+        create(new Accident(2, "Accident 2", "Отключены габаритные огни",
+                "ул. Советская д.11", new AccidentType(2, "Машина и человек"),
+                Set.of(new Rule(2, "Статья. 2"))));
+        create(new Accident(3, "Accident 3", "Не уступил дорогу при помехе с права",
+                "ул. Винокурова д.15", new AccidentType(3, "Машина и велосипед"),
+                Set.of(new Rule(3, "Статья. 3"))));
     }
 
     @Override
@@ -38,7 +47,8 @@ public class MemoryAccidentRepository implements AccidentRepository {
             return new Accident(
                     value.getId(), accident.getName(), accident.getText(),
                     accident.getAddress(), new AccidentType(accident.getType().getId(),
-                    accidentType.findById(accident.getType().getId()).get().getName()));
+                    accidentType.findById(accident.getType().getId()).get().getName()),
+                    (accident.getRules()));
         }) != null;
     }
 
