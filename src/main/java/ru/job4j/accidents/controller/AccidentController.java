@@ -36,18 +36,8 @@ public class AccidentController {
     @PostMapping("/saveAccident")
     public String save(@ModelAttribute Accident accident, Model model, HttpServletRequest httpServletRequest) {
         String[] ids = httpServletRequest.getParameterValues("rIds");
-        Set<Rule> rules = new HashSet<>();
-        for (String i : ids) {
-            Optional<Rule> rule = ruleService
-                    .findById(
-                            Integer.parseInt(i)
-                    );
-            if (rule.isEmpty()) {
-                return "errors/404";
-            }
-            rules.add(rule.get());
-        }
-        accident.setRules(rules);
+
+        accident.setRules(ruleService.findByIds(ids));
         accidentService.create(accident);
         model.addAttribute("message");
         return "redirect:/index";
@@ -78,20 +68,10 @@ public class AccidentController {
         }
         accident.setType(accidentType.get());
         String[] ds = httpServletRequest.getParameterValues("rIds");
-        Set<Rule> rules = new HashSet<>();
-        for (String i : ds) {
-            Optional<Rule> rule = ruleService
-                    .findById(
-                            Integer.parseInt(i)
-                    );
-            if (rule.isEmpty()) {
-                return "errors/404";
-            }
-            rules.add(rule.get());
-        }
-        accident.setRules(rules);
+        var isUpdatedRules = ruleService.findByIds(ds);
+        accident.setRules(isUpdatedRules);
         var isUpdated = accidentService.update(accident);
-        if (!isUpdated) {
+        if (!isUpdated || isUpdatedRules.isEmpty()) {
         model.addAttribute("message", "Обновление не выполнено");
             return "errors/404";
         }

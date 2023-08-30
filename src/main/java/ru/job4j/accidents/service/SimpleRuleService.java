@@ -7,6 +7,7 @@ import ru.job4j.accidents.repository.RuleJdbcTemplate;
 
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -22,5 +23,14 @@ public class SimpleRuleService implements RuleService {
     @Override
     public HashSet<Rule> findAll() {
         return ruleRepository.findAll();
+    }
+
+    @Override
+    public Set<Rule> findByIds(String[] ids) {
+        Set<Rule> rules = new HashSet<>();
+        for (String i : ids) {
+            findById(Integer.parseInt(i)).ifPresent(rules::add);
+        }
+        return rules;
     }
 }
