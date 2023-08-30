@@ -3,7 +3,7 @@ package ru.job4j.accidents.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Accident;
-import ru.job4j.accidents.repository.AccidentRepository;
+import ru.job4j.accidents.repository.AccidentJdbcTemplate;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -12,11 +12,11 @@ import java.util.Optional;
 @AllArgsConstructor
 public class SimpleAccidentService implements AccidentService {
 
-    private final AccidentRepository repository;
+    private final AccidentJdbcTemplate repository;
 
     @Override
     public Accident create(Accident accident) {
-        return repository.create(accident);
+        return repository.save(accident);
     }
 
     @Override
@@ -36,6 +36,6 @@ public class SimpleAccidentService implements AccidentService {
 
     @Override
     public Collection<Accident> findAll() {
-        return repository.findAll();
+        return repository.getAll();
     }
 }

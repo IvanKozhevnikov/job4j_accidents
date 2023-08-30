@@ -1,0 +1,3 @@
+insert into accidents (name, text, address, accident_types_id) values ('Accident 1', 'Парковка в неположенном месте', 'ул. Гагарина д.9', 1);
+insert into accidents (name, text, address, accident_types_id) values ('Accident 2', 'Отключены габаритные огни', 'ул. Советская д.11', 2);
+insert into accidents (name, text, address, accident_types_id) values ('Accident 3', 'Не уступил дорогу при помехе с права', 'ул. Винокурова д.15', 3);

@@ -1,7 +1,9 @@
-CREATE TABLE accidents
+create table if not exists accidents
 (
-    id SERIAL PRIMARY KEY,
+    id serial primary key,
     name varchar,
-    text text,
-    address varchar
+    text varchar,
+    address varchar,
+    accident_types_id int not null references accident_types (id)
 );
+
