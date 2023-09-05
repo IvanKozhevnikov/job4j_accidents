@@ -3,7 +3,7 @@ package ru.job4j.accidents.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Accident;
-import ru.job4j.accidents.repository.AccidentJdbcTemplate;
+import ru.job4j.accidents.repository.AccidentHibernate;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -12,7 +12,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class SimpleAccidentService implements AccidentService {
 
-    private final AccidentJdbcTemplate repository;
+    private final AccidentHibernate repository;
 
     @Override
     public Accident create(Accident accident) {
