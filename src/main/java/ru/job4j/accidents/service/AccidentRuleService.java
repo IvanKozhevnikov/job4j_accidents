@@ -1,27 +1,30 @@
 package ru.job4j.accidents.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Rule;
-import ru.job4j.accidents.repository.AccidentRuleHibernate;
+import ru.job4j.accidents.repository.AccidentCrudRepository;
+import ru.job4j.accidents.repository.AccidentRuleCrudRepository;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-
+@Service
 @AllArgsConstructor
-public class SimpleRuleService implements RuleService {
+public class AccidentRuleService implements RuleService {
 
-    private final AccidentRuleHibernate ruleRepository;
+    private final AccidentRuleCrudRepository accidentRuleCrudRepository;
 
     @Override
     public Optional<Rule> findById(int id) {
-        return ruleRepository.findById(id);
+        return accidentRuleCrudRepository.findById(id);
     }
 
     @Override
-    public HashSet<Rule> findAll() {
-        return ruleRepository.findAll();
+    public Collection<Rule> findAll() {
+        return (Collection<Rule>) accidentRuleCrudRepository.findAll();
     }
 
     @Override
