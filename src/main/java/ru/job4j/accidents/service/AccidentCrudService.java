@@ -22,7 +22,7 @@ public class AccidentCrudService implements AccidentService {
     @Override
     public boolean update(Accident accident) {
         if (!accidentCrudRepository.existsById(accident.getId())) {
-            throw new IllegalArgumentException("Accident not found");
+            return false;
         }
         accidentCrudRepository.save(accident);
         return true;

@@ -36,7 +36,6 @@ public class AccidentController {
     @PostMapping("/saveAccident")
     public String save(@ModelAttribute Accident accident, Model model, HttpServletRequest httpServletRequest) {
         String[] ids = httpServletRequest.getParameterValues("rIds");
-
         accident.setRules(ruleService.findByIds(ids));
         accidentService.create(accident);
         model.addAttribute("message");

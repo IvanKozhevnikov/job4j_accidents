@@ -5,14 +5,12 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Rule;
 import ru.job4j.accidents.repository.AccidentRuleCrudRepository;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class AccidentRuleService implements RuleService {
+public class AccidentRuleCurdService implements RuleService {
 
     private final AccidentRuleCrudRepository accidentRuleCrudRepository;
 
@@ -22,16 +20,16 @@ public class AccidentRuleService implements RuleService {
     }
 
     @Override
-    public Collection<Rule> findAll() {
-        return (Collection<Rule>) accidentRuleCrudRepository.findAll();
+    public Iterable<Rule> findAll() {
+        return  accidentRuleCrudRepository.findAll();
     }
 
     @Override
     public Set<Rule> findByIds(String[] ids) {
-        Set<Rule> rules = new HashSet<>();
-        for (String i : ids) {
-            findById(Integer.parseInt(i)).ifPresent(rules::add);
-        }
-        return rules;
+        return new HashSet<>(
+                accidentRuleCrudRepository.findAllById(
+                        Arrays.stream(ids)
+                                .map(Integer::parseInt)
+                                .collect(Collectors.toSet())));
     }
 }
