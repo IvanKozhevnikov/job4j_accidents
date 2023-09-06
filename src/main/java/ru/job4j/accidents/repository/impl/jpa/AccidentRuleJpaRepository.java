@@ -1,11 +1,11 @@
-package ru.job4j.accidents.repository;
+package ru.job4j.accidents.repository.impl.jpa;
 
 import org.springframework.data.repository.CrudRepository;
 import ru.job4j.accidents.model.Rule;
 
 import java.util.Set;
 
-public interface AccidentRuleCrudRepository extends CrudRepository<Rule, Integer> {
+public interface AccidentRuleJpaRepository extends CrudRepository<Rule, Integer> {
 
     @Override
     Iterable<Rule> findAll();

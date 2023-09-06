@@ -1,9 +1,9 @@
-package ru.job4j.accidents.repository;
+package ru.job4j.accidents.repository.impl.jpa;
 
 import org.springframework.data.repository.CrudRepository;
 import ru.job4j.accidents.model.AccidentType;
 
-public interface AccidentTypeCrudRepository extends CrudRepository<AccidentType, Integer> {
+public interface AccidentTypeJpaRepository extends CrudRepository<AccidentType, Integer> {
 
     @Override
     Iterable<AccidentType> findAll();

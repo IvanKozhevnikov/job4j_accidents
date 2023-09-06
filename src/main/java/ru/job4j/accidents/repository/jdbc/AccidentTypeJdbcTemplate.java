@@ -1,4 +1,4 @@
-package ru.job4j.accidents.repository;
+package ru.job4j.accidents.repository.jdbc;
 
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;

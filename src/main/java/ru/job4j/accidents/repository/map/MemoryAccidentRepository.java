@@ -1,10 +1,11 @@
-package ru.job4j.accidents.repository;
+package ru.job4j.accidents.repository.map;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.AccidentType;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.model.Rule;
+import ru.job4j.accidents.repository.impl.AccidentRepository;
 
 import java.util.Collection;
 import java.util.Map;

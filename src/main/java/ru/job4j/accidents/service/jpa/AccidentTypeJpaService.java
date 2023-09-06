@@ -1,17 +1,18 @@
-package ru.job4j.accidents.service;
+package ru.job4j.accidents.service.jpa;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.AccidentType;
-import ru.job4j.accidents.repository.AccidentTypeCrudRepository;
+import ru.job4j.accidents.repository.impl.jpa.AccidentTypeJpaRepository;
+import ru.job4j.accidents.service.impl.AccidentTypeService;
 
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class AccidentTypeCrudService implements AccidentTypeService {
+public class AccidentTypeJpaService implements AccidentTypeService {
 
-    private final AccidentTypeCrudRepository accidentTypeCrudRepository;
+    private final AccidentTypeJpaRepository accidentTypeCrudRepository;
 
     @Override
     public Optional<AccidentType> findById(int id) {

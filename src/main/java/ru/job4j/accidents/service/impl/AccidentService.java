@@ -1,11 +1,11 @@
-package ru.job4j.accidents.repository;
+package ru.job4j.accidents.service.impl;
 
 import ru.job4j.accidents.model.Accident;
 
 import java.util.Collection;
 import java.util.Optional;
 
-public interface AccidentRepository {
+public interface AccidentService {
 
     Accident create(Accident accident);
 
@@ -17,5 +17,3 @@ public interface AccidentRepository {
 
     Collection<Accident> findAll();
 }
-
-

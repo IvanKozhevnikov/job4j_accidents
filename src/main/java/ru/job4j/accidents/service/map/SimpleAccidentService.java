@@ -1,8 +1,9 @@
-package ru.job4j.accidents.service;
+package ru.job4j.accidents.service.map;
 
 import lombok.AllArgsConstructor;
 import ru.job4j.accidents.model.Accident;
-import ru.job4j.accidents.repository.AccidentHibernate;
+import ru.job4j.accidents.repository.hibernate.AccidentHibernate;
+import ru.job4j.accidents.service.impl.AccidentService;
 
 import java.util.Collection;
 import java.util.Optional;
