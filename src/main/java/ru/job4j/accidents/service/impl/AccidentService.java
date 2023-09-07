@@ -2,7 +2,7 @@ package ru.job4j.accidents.service.impl;
 
 import ru.job4j.accidents.model.Accident;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface AccidentService {
@@ -15,5 +15,5 @@ public interface AccidentService {
 
     Optional<Accident> findById(int id);
 
-    Collection<Accident> findAll();
+    List<Accident> findAll();
 }

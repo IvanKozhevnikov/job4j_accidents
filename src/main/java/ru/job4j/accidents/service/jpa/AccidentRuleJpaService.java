@@ -21,7 +21,7 @@ public class AccidentRuleJpaService implements RuleService {
     }
 
     @Override
-    public Iterable<Rule> findAll() {
+    public HashSet<Rule> findAll() {
         return  accidentRuleCrudRepository.findAll();
     }
 

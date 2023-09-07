@@ -6,6 +6,7 @@ import ru.job4j.accidents.model.AccidentType;
 import ru.job4j.accidents.repository.impl.jpa.AccidentTypeJpaRepository;
 import ru.job4j.accidents.service.impl.AccidentTypeService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,7 +21,7 @@ public class AccidentTypeJpaService implements AccidentTypeService {
     }
 
     @Override
-    public Iterable<AccidentType> findAll() {
+    public List<AccidentType> findAll() {
         return  accidentTypeCrudRepository.findAll();
     }
 }

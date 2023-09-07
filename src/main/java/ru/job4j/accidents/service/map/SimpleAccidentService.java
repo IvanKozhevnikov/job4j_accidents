@@ -6,6 +6,7 @@ import ru.job4j.accidents.repository.hibernate.AccidentHibernate;
 import ru.job4j.accidents.service.impl.AccidentService;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -35,7 +36,7 @@ public class SimpleAccidentService implements AccidentService {
     }
 
     @Override
-    public Collection<Accident> findAll() {
+    public List<Accident> findAll() {
         return repository.getAll();
     }
 }

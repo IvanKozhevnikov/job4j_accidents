@@ -5,6 +5,7 @@ import ru.job4j.accidents.model.AccidentType;
 import ru.job4j.accidents.repository.hibernate.AccidentTypeHibernate;
 import ru.job4j.accidents.service.impl.AccidentTypeService;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -14,7 +15,7 @@ public class SimpleAccidentTypeService implements AccidentTypeService {
     private final AccidentTypeHibernate accidentTypeRepository;
 
     @Override
-    public Iterable<AccidentType> findAll() {
+    public List<AccidentType> findAll() {
         return accidentTypeRepository.findAll();
     }
 

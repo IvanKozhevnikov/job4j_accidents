@@ -6,45 +6,45 @@ import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.repository.impl.jpa.AccidentJpaRepository;
 import ru.job4j.accidents.service.impl.AccidentService;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class AccidentJpaService implements AccidentService {
 
-    private final AccidentJpaRepository accidentCrudRepository;
+    private final AccidentJpaRepository accidentJpaRepository;
 
     @Override
     public Accident create(Accident accident) {
-        return accidentCrudRepository.save(accident);
+        return accidentJpaRepository.save(accident);
     }
 
     @Override
     public boolean update(Accident accident) {
-        if (!accidentCrudRepository.existsById(accident.getId())) {
+        if (!accidentJpaRepository.existsById(accident.getId())) {
             return false;
         }
-        accidentCrudRepository.save(accident);
+        accidentJpaRepository.save(accident);
         return true;
     }
 
     @Override
     public boolean deleteById(int id) {
-        if (!accidentCrudRepository.existsById(id)) {
+        if (!accidentJpaRepository.existsById(id)) {
             throw new IllegalArgumentException("Accident not found");
         }
-        accidentCrudRepository.deleteById(id);
+        accidentJpaRepository.deleteById(id);
         return true;
     }
 
     @Override
     public Optional<Accident> findById(int id) {
-        return accidentCrudRepository.findById(id);
+        return accidentJpaRepository.findById(id);
     }
 
     @Override
-    public Collection<Accident> findAll() {
-        return (Collection<Accident>) accidentCrudRepository.findAll();
+    public List<Accident> findAll() {
+        return accidentJpaRepository.findAll();
     }
 }
