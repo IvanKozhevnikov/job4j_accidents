@@ -9,7 +9,6 @@ import ru.job4j.accidents.service.impl.AccidentTypeService;
 import java.util.List;
 import java.util.Optional;
 
-@Service
 @AllArgsConstructor
 public class AccidentTypeJpaService implements AccidentTypeService {
 

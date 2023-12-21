@@ -1,17 +1,18 @@
 package ru.job4j.accidents.repository.map;
 
 import net.jcip.annotations.ThreadSafe;
-import org.springframework.stereotype.Repository;
-import ru.job4j.accidents.model.AccidentType;
 import ru.job4j.accidents.model.Accident;
+import ru.job4j.accidents.model.AccidentType;
 import ru.job4j.accidents.model.Rule;
 import ru.job4j.accidents.repository.impl.AccidentRepository;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Repository
 @ThreadSafe
 public class MemoryAccidentRepository implements AccidentRepository {
 

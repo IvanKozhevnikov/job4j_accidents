@@ -6,9 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.model.AccidentType;
-import ru.job4j.accidents.service.impl.AccidentService;
-import ru.job4j.accidents.service.impl.AccidentTypeService;
-import ru.job4j.accidents.service.impl.RuleService;
+import ru.job4j.accidents.service.data.AccidentService;
+import ru.job4j.accidents.service.data.AccidentTypeService;
+import ru.job4j.accidents.service.data.RuleService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;

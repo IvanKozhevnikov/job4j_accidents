@@ -4,13 +4,11 @@ import lombok.AllArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.AccidentType;
 
 import java.util.List;
 import java.util.Optional;
 
-@Repository
 @AllArgsConstructor
 public class AccidentTypeHibernate {
 

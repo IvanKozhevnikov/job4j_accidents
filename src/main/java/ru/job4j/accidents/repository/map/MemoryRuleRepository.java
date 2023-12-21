@@ -1,7 +1,6 @@
 package ru.job4j.accidents.repository.map;
 
 import net.jcip.annotations.ThreadSafe;
-import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.Rule;
 import ru.job4j.accidents.repository.impl.RuleRepository;
 
@@ -10,7 +9,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 
-@Repository
 @ThreadSafe
 public class MemoryRuleRepository implements RuleRepository {
 

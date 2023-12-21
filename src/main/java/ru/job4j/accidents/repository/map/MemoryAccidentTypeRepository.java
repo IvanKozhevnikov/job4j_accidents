@@ -1,7 +1,6 @@
 package ru.job4j.accidents.repository.map;
 
 import net.jcip.annotations.ThreadSafe;
-import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.AccidentType;
 import ru.job4j.accidents.repository.impl.AccidentTypeRepository;
 
@@ -10,7 +9,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Repository
 @ThreadSafe
 public class MemoryAccidentTypeRepository implements AccidentTypeRepository {
 

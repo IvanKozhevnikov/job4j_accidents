@@ -7,7 +7,7 @@ import ru.job4j.accidents.model.Rule;
 
 import java.util.*;
 
-@Repository
+
 @AllArgsConstructor
 public class RuleJdbcTemplate {
 

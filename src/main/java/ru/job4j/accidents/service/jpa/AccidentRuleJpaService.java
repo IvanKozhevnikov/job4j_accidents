@@ -9,7 +9,6 @@ import ru.job4j.accidents.service.impl.RuleService;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Service
 @AllArgsConstructor
 public class AccidentRuleJpaService implements RuleService {
 

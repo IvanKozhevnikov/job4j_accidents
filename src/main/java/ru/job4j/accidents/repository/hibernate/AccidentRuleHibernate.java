@@ -4,14 +4,12 @@ import lombok.AllArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.Rule;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
 @AllArgsConstructor
 public class AccidentRuleHibernate {
 

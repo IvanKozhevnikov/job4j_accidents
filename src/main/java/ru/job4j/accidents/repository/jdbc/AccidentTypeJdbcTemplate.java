@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
-@Repository
 public class AccidentTypeJdbcTemplate {
 
     private static final String SELECT_ALL_ACCIDENT_TYPE_QUERY = "select id, name from accident_types";
