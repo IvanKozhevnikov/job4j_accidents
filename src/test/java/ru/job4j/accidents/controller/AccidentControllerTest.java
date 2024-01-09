@@ -14,6 +14,8 @@ import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.model.AccidentType;
 import ru.job4j.accidents.model.Rule;
 import ru.job4j.accidents.service.data.AccidentService;
+import ru.job4j.accidents.service.data.AccidentTypeService;
+import ru.job4j.accidents.service.data.RuleService;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -33,6 +35,12 @@ class AccidentControllerTest {
 
     @MockBean
     private AccidentService accidentService;
+
+    @MockBean
+    private RuleService ruleService;
+
+    @MockBean
+    private AccidentTypeService accidentTypeService;
 
     private static List<AccidentType> accidentTypes;
 
@@ -64,7 +72,8 @@ class AccidentControllerTest {
     @WithMockUser
     @Transactional
     public void whenGetByIdForUpdateViewThenReturn() throws Exception {
-        Mockito.when(this.accidentService.findById(1)).thenReturn(Optional.of(expectedAccident));
+          Mockito.when(this.accidentService.findById(1)).thenReturn(Optional.of(expectedAccident));
+          Mockito.when(this.accidentTypeService.findAll()).thenReturn(accidentTypes);
 
         this.mockMvc.perform(get("/accidents/formUpdateAccident?id=1"))
                 .andDo(print())
@@ -78,6 +87,9 @@ class AccidentControllerTest {
     @WithMockUser
     @Transactional
     public void whenGetCreateAccidentViewThenReturnCreateView() throws Exception {
+        Mockito.when(this.accidentTypeService.findAll()).thenReturn(accidentTypes);
+        Mockito.when(this.ruleService.findAll()).thenReturn(rules);
+
         this.mockMvc.perform(get("/accidents/createAccident"))
                 .andDo(print())
                 .andExpect(status().isOk())
