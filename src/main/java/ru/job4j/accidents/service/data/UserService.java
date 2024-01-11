@@ -26,11 +26,4 @@ public class UserService {
         }
         return rsl;
     }
-//    public boolean save(User user) {
-//        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
-//            return false;
-//        }
-//        userRepository.save(user);
-//        return true;
-//    }
 }
