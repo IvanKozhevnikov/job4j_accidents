@@ -24,13 +24,13 @@ public class RegControl {
         user.setEnabled(true);
         user.setPassword(encoder.encode(user.getPassword()));
         user.setAuthority(authorities.findByAuthority("ROLE_USER"));
-        if (!users.save(user)) {
-            model.addAttribute("error",
-                    "This login already exists");
-            return "reg";
-        }
+        if (users.save(user).isPresent()) {
+            return "redirect:/login";
 
-        return "redirect:/login";
+        }
+        model.addAttribute("error", "This login already exists");
+        return "reg";
+
     }
 
     @GetMapping("/reg")
