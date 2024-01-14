@@ -2,6 +2,7 @@ package ru.job4j.accidents.controller;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -20,16 +21,22 @@ import ru.job4j.accidents.service.data.RuleService;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 
 @SpringBootTest(classes = Main.class)
 @AutoConfigureMockMvc
 @Transactional
 class AccidentControllerTest {
 
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private MockMvc mockMvc;
 
@@ -59,13 +66,13 @@ class AccidentControllerTest {
         expectedAccident = new Accident();
         expectedAccident.setId(1);
         expectedAccident.setName("test1");
-        expectedAccident.setType(accidentTypes.get(0));
+        expectedAccident.setType(accidentTypes.get(1));
 
         rules = List.of(
                 new Rule(1, "Статья. 1"),
                 new Rule(2, "Статья. 2"),
                 new Rule(3, "Статья. 3"));
-
+        expectedAccident.setRules(Set.of(rules.get(1)));
     }
 
     @Test
@@ -108,5 +115,46 @@ class AccidentControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("errors/404"));
+    }
+
+    @Test
+    @WithMockUser
+    @Transactional
+    void saveAccident() throws Exception {
+        this.mockMvc.perform(post("/accidents/saveAccident")
+                .param("name", "name")
+                .param("text", "text")
+                .param("address", "address")
+                .param("type.id", "2")
+                .param("rIds", "1"))
+                .andDo(print())
+                .andExpect(status().is3xxRedirection());
+        ArgumentCaptor<Accident> argumentCaptor = ArgumentCaptor.forClass(Accident.class);
+        verify(accidentService).create(argumentCaptor.capture());
+        assertThat(argumentCaptor.getValue().getName()).isEqualTo("name");
+        assertThat(argumentCaptor.getValue().getText()).isEqualTo("text");
+    }
+
+
+
+    @Test
+    @WithMockUser
+    @Transactional
+    void updateAccident() throws Exception {
+        this.mockMvc.perform(post("/accidents/updateAccident")
+                .param("name", "name")
+                .param("text", "text")
+                .param("address", "address")
+                .param("type.id", "2")
+                .param("rIds", "1"))
+                .andDo(print())
+                .andExpect(status().is2xxSuccessful());
+        ArgumentCaptor<Accident> argumentCaptor = ArgumentCaptor.forClass(Accident.class);
+        verify(accidentService).update(argumentCaptor.capture());
+        Accident capturedAccident = argumentCaptor.getValue();
+        assertThat(capturedAccident.getName()).isEqualTo("name");
+        assertThat(capturedAccident.getText()).isEqualTo("text");
+        assertThat(capturedAccident.getAddress()).isEqualTo("address");
+        assertThat(capturedAccident.getType().getId()).isEqualTo(2);
     }
 }
