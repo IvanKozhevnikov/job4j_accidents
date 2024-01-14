@@ -43,7 +43,7 @@ public class AccidentController {
 
     @GetMapping("/formUpdateAccident")
     public String update(@RequestParam("id") int id, Model model) {
-                var accidentOptional = accidentService.findById(id);
+        var accidentOptional = accidentService.findById(id);
         if (accidentOptional.isEmpty()) {
             model.addAttribute("message", "Заявка с указанным идентификатором не найдена");
             return "errors/404";
@@ -56,21 +56,11 @@ public class AccidentController {
 
     @PostMapping("/updateAccident")
     public String update(@ModelAttribute Accident accident, Model model, HttpServletRequest httpServletRequest) {
-        Optional<AccidentType> accidentType = accidentTypeService
-                .findById(
-                        accident.getType()
-                                .getId()
-                );
-        if (accidentType.isEmpty()) {
-            return "errors/404";
-        }
-        accident.setType(accidentType.get());
         String[] ds = httpServletRequest.getParameterValues("rIds");
-        var isUpdatedRules = ruleService.findByIds(ds);
-        accident.setRules(isUpdatedRules);
+        accident.setRules(ruleService.findByIds(ds));
         var isUpdated = accidentService.update(accident);
-        if (!isUpdated || isUpdatedRules.isEmpty()) {
-        model.addAttribute("message", "Обновление не выполнено");
+        if (!isUpdated) {
+            model.addAttribute("message", "Обновление не выполнено");
             return "errors/404";
         }
         return "redirect:/index";
