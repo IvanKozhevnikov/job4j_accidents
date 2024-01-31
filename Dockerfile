@@ -10,4 +10,4 @@ RUN mvn package -Dmaven.test.skip=true
 
 CMD ["mvn", "liquibase:update", "-Pdocker"]
 
-CMD ["java", "-jar", "target/accidents.jar"]
+CMD ["java", "-jar", "target/job4j_accidents-1.0-SNAPSHOT.jar"]
