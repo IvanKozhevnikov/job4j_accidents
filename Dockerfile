@@ -4,7 +4,7 @@ RUN mkdir job4j_accidents
 
 WORKDIR job4j_accidents
 
-COPY . target/accidents.jar
+COPY . .
 
 RUN mvn package -Dmaven.test.skip=true
 
