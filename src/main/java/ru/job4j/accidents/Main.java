@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 @SpringBootApplication
@@ -24,7 +25,7 @@ public class Main {
     private static Connection loadConnection() throws ClassNotFoundException, SQLException {
         var config = new Properties();
         try (InputStream in = Main.class.getClassLoader()
-                .getResourceAsStream("app.properties")) {
+                .getResourceAsStream("application.properties")) {
             config.load(in);
         } catch (IOException e) {
             throw new IllegalStateException(e);
@@ -40,7 +41,8 @@ public class Main {
         );
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+
         SpringApplication.run(Main.class, args);
     }
 }
