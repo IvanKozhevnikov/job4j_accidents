@@ -48,7 +48,7 @@
             <id>production</id>
             <properties>
                 <liquibase.changeLogFile>db/dbchangelog.xml</liquibase.changeLogFile>
-                <liquibase.url>jdbc:postgresql://127.0.0.1:5432/tracker</liquibase.url>
+                <liquibase.url>jdbc:postgresql://127.0.0.1:5432/accidents</liquibase.url>
                 <liquibase.username>postgres</liquibase.username>
                 <liquibase.password>password</liquibase.password>
             </properties>

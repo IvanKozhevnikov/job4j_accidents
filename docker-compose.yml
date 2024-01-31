@@ -6,20 +6,20 @@ services:
     environment:
       - POSTGRES_PASSWORD=1234
       - POSTGRES_USER=postgres
-      - POSTGRES_DB=tracker
+      - POSTGRES_DB=accidents
       - PGDATA=/var/lib/postgresql/data
     volumes:
       - ./db/shortcut/data:/var/lib/postgresql/data
     restart: always
-  job4j_tracker:
+  job4j_accidents:
     build:
       context: .
       dockerfile: Dockerfile
     environment:
-      - JDBC_URL=jdbc:postgresql://db:5432/tracker
+      - JDBC_URL=jdbc:postgresql://db:5432/accidents
       - JDBC_USERNAME=postgres
       - JDBC_PASSWORD=1234
       - JDBC_DRIVER=org.postgresql.Driver
-    container_name: job4j_tracker
+    container_name: job4j_accidents
     depends_on:
       - db
