@@ -10,7 +10,7 @@ import ru.job4j.accidents.service.data.AccidentService;
 import ru.job4j.accidents.service.data.AccidentTypeService;
 import ru.job4j.accidents.service.data.RuleService;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @Controller

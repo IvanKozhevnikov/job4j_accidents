@@ -5,11 +5,9 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Rule;
 import ru.job4j.accidents.repository.data.RuleRepository;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @AllArgsConstructor
@@ -26,9 +24,11 @@ public class RuleService {
     }
 
     public Set<Rule> findByIds(String[] ids) {
-        return (Set<Rule>) ruleRepository.findAllById(
-                Arrays.stream(ids)
-                        .map(Integer::parseInt)
-                        .collect(Collectors.toSet()));
+        return Stream.of(ids)
+                .map(Integer::parseInt)
+                .map(ruleRepository::findById)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toSet());
     }
 }

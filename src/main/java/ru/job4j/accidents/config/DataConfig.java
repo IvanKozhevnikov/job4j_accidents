@@ -1,16 +1,27 @@
 package ru.job4j.accidents.config;
 
+import org.hibernate.jpa.boot.spi.EntityManagerFactoryBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableLoadTimeWeaving;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.weaving.DefaultContextLoadTimeWeaver;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
+import org.springframework.instrument.classloading.LoadTimeWeaver;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.persistence.EntityManagerFactory;
+
+
+import jakarta.persistence.*;
 import javax.sql.DataSource;
 
 @Configuration
@@ -18,12 +29,29 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 public class DataConfig {
 
+ //   @Bean
+  //  public PasswordEncoder passwordEncoder() {
+  //      return new BCryptPasswordEncoder();
+  //  }
+
+
+    @Bean
+    public DataSource datasource() {
+        return DataSourceBuilder.create()
+                .driverClassName("org.postgresql.Driver")
+                .url("jdbc:postgresql://127.0.0.1:5432/accidents")
+                .username("postgres")
+                .password("1234")
+                .build();
+    }
+
     @Primary
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource ds) {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setGenerateDdl(true);
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+        factory.setEntityManagerFactoryInterface(jakarta.persistence.EntityManagerFactory.class);
         factory.setJpaVendorAdapter(vendorAdapter);
         factory.setPackagesToScan("ru.job4j.accidents");
         factory.setDataSource(ds);

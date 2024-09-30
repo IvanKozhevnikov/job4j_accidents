@@ -1,5 +1,5 @@
 package ru.job4j.accidents.controller;
-
+/**
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -38,3 +38,4 @@ public class RegControl {
         return "reg";
     }
 }
+*/

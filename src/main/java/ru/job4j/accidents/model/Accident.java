@@ -1,11 +1,12 @@
 package ru.job4j.accidents.model;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+
 import java.util.Set;
 
 @Data
@@ -27,7 +28,7 @@ public class Accident {
     private AccidentType type;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(name = "accident_rules",
-            joinColumns = { @JoinColumn(name = "accident_id", nullable = false, updatable = false) },
-            inverseJoinColumns = { @JoinColumn(name = "rule_id", nullable = false, updatable = false) })
+            joinColumns = { @JoinColumn(name = "accident_id", nullable = false, updatable = false, insertable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "rule_id", nullable = false, updatable = false, insertable = false) })
     private Set<Rule> rules;
 }

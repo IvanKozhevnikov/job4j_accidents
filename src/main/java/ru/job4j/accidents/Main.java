@@ -2,6 +2,8 @@ package ru.job4j.accidents;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.annotation.EnableLoadTimeWeaving;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,7 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
-@SpringBootApplication
+@SpringBootApplication()
 public class Main {
 
     private static String loadSysEnvIfNullThenConfig(String sysEnv, String key, Properties config) {
