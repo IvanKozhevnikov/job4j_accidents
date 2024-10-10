@@ -1,41 +1,23 @@
 package ru.job4j.accidents.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import jakarta.persistence.*;
 import java.util.Objects;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
 @Entity
-@Table(name = "users")
-public class User {
-    @Getter
+@Table(name = "author")
+public class Author {
+
     @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Getter
     @Setter
-    private String password;
-
-    @Getter
-    @Setter
-    private String username;
-
-    @Getter
-    @Setter
-    @ManyToOne
-    @JoinColumn(name = "author_id")
-    private Author authority;
-
-    @Getter
-    @Setter
-    private boolean enabled;
+    private String authority;
 
     @Override
     public boolean equals(Object o) {
@@ -45,8 +27,8 @@ public class User {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        User user = (User) o;
-        return id == user.id;
+        Author author = (Author) o;
+        return id == author.id;
     }
 
     @Override

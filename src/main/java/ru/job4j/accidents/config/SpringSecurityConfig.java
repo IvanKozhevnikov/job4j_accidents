@@ -43,5 +43,4 @@ public class SpringSecurityConfig {
                         .logoutSuccessUrl("/auth/login"));
         return http.build();
     }
-}
-*/
+}*/

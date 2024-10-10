@@ -1,19 +1,19 @@
-package ru.job4j.accidents.service.data;
+package ru.job4j.accidents.service;
 
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.User;
-import ru.job4j.accidents.repository.data.UserRepository;
+import ru.job4j.accidents.repository.UserRepository;
 
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class UserService {
-    private final UserRepository userRepository;
 
+    private final UserRepository userRepository;
 
     private static final Logger LOG = LoggerFactory.getLogger(UserService.class.getName());
 

@@ -1,9 +1,13 @@
-package ru.job4j.accidents.repository.data;
+package ru.job4j.accidents.repository;
 
 import org.springframework.data.repository.CrudRepository;
+import ru.job4j.accidents.model.Author;
 import ru.job4j.accidents.model.Authority;
+
+import java.util.Optional;
 
 public interface AuthorityRepository extends CrudRepository<Authority, Integer> {
 
-    Authority findByAuthority(String authority);
+    Optional <Authority> findByAuthority(String authority);
+
 }
